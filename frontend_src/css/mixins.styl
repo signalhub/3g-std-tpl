@@ -1,0 +1,88 @@
+button(bc, lightness-factor=60%)
+  cursor: pointer
+  transition background-color .3s ease
+  &:hover
+    background-color: lightness(bc, lightness-factor)
+
+columns(num_cols = 3, gutter = 1, below-size='m')
+  width: 100%
+  .column
+    col(1/num_col, gutter:gutter, cycle: num_col)
+    padding: pad
+    margin-bottom: pad
+    +below(below-size)
+      stack()
+
+content-card(left-side=true, width-static-column=20em, below-size='s')
+  display: table
+  width: 100%
+  font-size 1rem
+  .left
+  .right
+    display: table-cell
+    vertical-align: top
+  .right
+    if !left-side
+      width width-static-column
+  .left
+    if left-side
+      width width-static-column
+    padding-right: pad
+    .picture
+      width: 100%
+  +below(below-size)
+    display: block
+    .left
+    .right
+      display: block
+    .left
+      width: auto
+      padding: 0
+
+
+icon(size_icon = 1.5em)
+  &:before
+    content: ""
+    display: inline-block
+    size size_icon
+    vertical-align: middle
+    margin-right: (pad/2)
+    background-size cover
+    background-image: url(http://khuralsearch.com/time-8-256.png)
+
+
+
+//decorators of text info
+.dec--sequence
+  &:before
+    content ', '
+
+.dec--property
+  &:before
+    content ': '
+
+.dec--equal
+  &:before
+    content ' - '
+
+.dec--spaced
+  &:before
+    content '  '
+
+.dec--counted
+  &:after
+    content ') '
+  &:before
+    content ' ('
+
+.dec--secondary
+  &:before
+    content " / "
+
+.dec--factor
+  &:before
+    content " / "
+
+.dec--doted
+  &:after
+    content "..."

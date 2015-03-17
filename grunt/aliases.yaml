@@ -1,0 +1,32 @@
+default:
+  - dev
+  - watch
+
+server:
+  - 'connect'
+  - default
+
+dev_min:
+  - dev
+  - 'concurrent:production'
+
+dev:
+  - base
+  - 'concurrent:manage_src_dev'
+  - manage
+
+manage:
+  - 'copy:bower'
+  - 'copy:all_static'
+  - 'copy:templates'
+  - 'autoprefixer'
+
+base:
+  - 'concurrent:clean_and_check'
+
+pub:
+  - base
+  - 'concurrent:manage_src_pub'
+  - manage
+  - 'concurrent:production'
+

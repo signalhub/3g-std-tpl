@@ -1,0 +1,35 @@
+//edit()
+ct-presets(1.16, false, false)
+t-headers(lucida-grande)
+
+
+*, *:after, *:before
+  box-sizing border-box
+  position: relative
+
+html
+  font-family: antiqua
+  color: low-col
+  background-color: #fff
+  #browse-happy
+    display none
+    padding: 1em
+    background-color: browse-happy-col
+    color: high-col
+    fixed left top
+    width: 100%
+    z-index: 9999
+    >p
+      font-size: .8rem
+      margin: 0
+      padding: 0
+  &.no-svg
+  &.no-canvas
+    #browse-happy
+      display block
+    #content
+      display none
+  &.svg
+  &.canvas
+    #content
+      display block

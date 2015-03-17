@@ -1,0 +1,12 @@
+extends ../../templates/index_general
+
+
+append head
+    - var BRANCH_PATH = 'services/exchange_rates_service/'
+    +style('css/app', BRANCH_PATH)
+
+block header
+    h1 Hello 3G Standart Template - service
+    a(href='/proto-for-finances/static/index.html') main index
+append scripts
+    +script('js/main', BRANCH_PATH)
