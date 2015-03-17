@@ -1,0 +1,25 @@
+mixin style(relative_path, branch_path)
+    - branch_path = branch_path || ''
+    link(rel='stylesheet' href=STATIC_PATH + branch_path + relative_path + (debug_mode ? '.css':'.min.css'))
+
+mixin script(relative_path, branch_path)
+    - branch_path = branch_path || ''
+    script(src=STATIC_PATH + branch_path + relative_path + (debug_mode ? '.js' : '.min.js'))
+
+mixin smart_import(path, level)
+    level = level || 0
+    - var full_path = path
+    - var i = 0
+    while i < level
+        - full_path = '../' + full_path
+    +script(full_path)
+
+mixin header_meta(headers)
+    if headers
+        each content, key in headers
+            meta(name='#{key}', content='#{content}')
+
+mixin header_og_meta(headers)
+    if headers
+        each content, key in headers
+            meta(property='og:#{key}', content='#{content}')

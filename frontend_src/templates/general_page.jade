@@ -1,0 +1,47 @@
+- var site_name = 'www.rambler.ru'
+- var site_developer = 'German Gurov'
+- var debug_mode = true
+- var STATIC_PATH = '/proto-for-finances/static/'
+
+include mixins/general
+
+doctype html
+html(lang="en")
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        title= site_name
+        +header_meta({description:'finances', autor:site_developer, type:'site'})
+        +header_og_meta({title:'finances', description:'finances', url:'', image:''})
+
+        block head
+            +style('css/app')
+            +script('js/modernizr')
+    body
+        //add old browser alert
+        include system/browser_alert
+
+        //header section
+        header.root
+            block header
+                include blocks/header
+
+        //main section
+        main.root
+            block main
+
+        //footer section
+        footer.root
+            block footer
+                include blocks/footer
+
+        //script section
+        block scripts
+            if debug_mode
+                include system/debug_panel
+            +script('js/main')
+
+
+
+
+
