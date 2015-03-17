@@ -1,12 +1,4 @@
 var _ = require('underscore');
-var test = require('./test.js');
-
-test();
-
-_.each([1,2,3,4, 5], function(d){
-   console.log(d);
-});
-
 
 //add debug panel
 (function(){
