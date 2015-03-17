@@ -2,9 +2,9 @@ module.exports = function(grunt) {
     return {
         compile: {
             expand: true,
-            cwd: grunt.paths.src,
-            src: grunt.get_project_path(grunt.paths.styles, 'direct', 'app.styl'),
-            dest: grunt.paths.static,
+            cwd: grunt.get_root_path('src'),
+            src: grunt.get_project_path('styles', 'direct', 'app.styl'),
+            dest: grunt.get_root_path('static'),
             ext: '.css'
         },
         options: {

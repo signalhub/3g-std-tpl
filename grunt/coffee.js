@@ -2,11 +2,11 @@ module.exports = function(grunt) {
     return {
         compile: {
             expand: true,
-            cwd: grunt.paths.src,
+            cwd: grunt.get_root_path('src'),
             src: [
-                grunt.get_project_path(grunt.paths.code, 'any', '*.coffee')
+                grunt.get_project_path('code', 'any', '*.coffee')
             ],
-            dest: grunt.paths.temp,
+            dest: grunt.get_root_path('temp'),
             ext: '.js'
         },
         options: {

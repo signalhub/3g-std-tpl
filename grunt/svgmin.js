@@ -4,11 +4,11 @@ module.exports = function(grunt) {
             files: [
                 {
                     expand: true,
-                    cwd: grunt.paths.src,
+                    cwd: grunt.get_root_path('src'),
                     src: [
-                        grunt.get_project_path(grunt.paths.images, 'any', '*.svg')
+                        grunt.get_project_path('images', 'any', '*.svg')
                     ],
-                    dest: grunt.paths.static
+                    dest: grunt.get_root_path('static')
                 }
             ]
         },

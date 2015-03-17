@@ -3,12 +3,12 @@ module.exports = function(grunt) {
         compile: {
             files: [{
                 expand: true,
-                cwd: grunt.paths.src,
+                cwd: grunt.get_root_path('src'),
                 src: [
-                    '**/*.jade',
-                    grunt.get_project_path(grunt.paths.templates, 'exclude', '*.jade')
+                    grunt.get_project_path('', 'free', '*.jade'),
+                    grunt.get_project_path('templates', 'exclude', '*.jade')
                 ],
-                dest: grunt.paths.static,
+                dest: grunt.get_root_path('static'),
                 ext: '.html'
             }]
         },

@@ -4,7 +4,7 @@ module.exports = function(grunt) {
             reporter: require('jshint-stylish')
         },
         main: [
-            grunt.paths.src + '**/*.js'
+            grunt.get_root_path('src') + grunt.get_project_path('', 'free', '*.js')
         ]
     }
 };

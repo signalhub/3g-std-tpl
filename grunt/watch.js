@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
         code: {
             files: [
-                grunt.paths.src + grunt.get_project_path(grunt.paths.code, 'any', '*.{js,coffee}')
+                grunt.get_root_path('src') + grunt.get_project_path('code', 'any', '*.{js,coffee}')
             ],
             tasks: [
                 'newer:jshint',
@@ -17,8 +17,8 @@ module.exports = function(grunt) {
 
         styles: {
             files: [
-                grunt.paths.src + grunt.get_project_path(grunt.paths.styles, 'any', '*.css'),
-                grunt.paths.src + grunt.get_project_path(grunt.paths.styles, 'any', '*.styl')
+                grunt.get_root_path('src') + grunt.get_project_path('styles', 'any', '*.css'),
+                grunt.get_root_path('src') + grunt.get_project_path('styles', 'any', '*.styl')
             ],
             tasks: [
                 'stylus:compile',
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 
         copy_templates: {
             files: [
-                grunt.paths.src + '**/*.jade'
+                grunt.get_root_path('src') + '**/*.jade'
             ],
             tasks: [
                 'newer:copy:templates'
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 
         compile_layouts: {
             files: [
-                grunt.paths.src + '**/*.jade'
+                grunt.get_root_path('src') + '**/*.jade'
             ],
             tasks: [
                 'jade:compile'
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
 
         img: {
             files: [
-                grunt.paths.src + grunt.get_project_path(grunt.paths.images, 'any', '*.{png,jpg,gif}')
+                grunt.get_root_path('src') + grunt.get_project_path('images', 'any', '*.{png,jpg,gif}')
             ],
             tasks: [
                 'newer:imagemin'
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 
         svg: {
             files: [
-                grunt.paths.src + grunt.get_project_path(grunt.paths.images, 'any', '*.svg')
+                grunt.get_root_path('src') + grunt.get_project_path('images', 'any', '*.svg')
             ],
             tasks: [
                 'newer:svgmin'

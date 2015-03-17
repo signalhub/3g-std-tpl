@@ -2,11 +2,11 @@ module.exports = function(grunt) {
     return {
         all: {
             expand: true,
-            cwd: grunt.paths.src,
+            cwd: grunt.get_root_path('src'),
             src: [
-                grunt.get_project_path(grunt.paths.code, 'direct', 'main.js')
+                grunt.get_project_path('code', 'direct', 'main.js')
             ],
-            dest: grunt.paths.static
+            dest: grunt.get_root_path('static')
         }
     }
 };

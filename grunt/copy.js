@@ -10,49 +10,49 @@ module.exports = function(grunt) {
                         'bower/jquery/dist/jquery.js',
                         'bower/d3/d3.js'
                     ],
-                    dest: grunt.paths.static + grunt.paths.code,
+                    dest: grunt.get_root_path(['static', 'code']),
                     filter: 'isFile'
                 }
             ]
         },
         fonts:{
             expand: true,
-            cwd: grunt.paths.src,
+            cwd: grunt.get_root_path('src'),
             src: [
-                grunt.get_project_path(grunt.paths.fonts)
+                grunt.get_project_path('fonts', 'any')
             ],
-            dest: grunt.paths.static
+            dest: grunt.get_root_path('static')
         },
         data:{
             expand: true,
-            cwd: grunt.paths.src,
+            cwd: grunt.get_root_path('src'),
             src: [
-                grunt.get_project_path(grunt.paths.data),
-                grunt.get_project_path(grunt.paths.data + grunt.paths.layouts, 'exclude')
+                grunt.get_project_path('data', 'any'),
+                grunt.get_project_path(['data', 'layouts'], 'exclude')
             ],
-            dest: grunt.paths.static
+            dest: grunt.get_root_path('static')
         },
         all_static:{
             files: [
                 {
                     expand: true,
-                    cwd: grunt.paths.src,
+                    cwd: grunt.get_root_path('src'),
                     src: [
-                        grunt.get_project_path(grunt.paths.fonts),
-                        grunt.get_project_path(grunt.paths.data),
-                        grunt.get_project_path(grunt.paths.data + grunt.paths.layouts, 'exclude')
+                        grunt.get_project_path('fonts'),
+                        grunt.get_project_path('data'),
+                        grunt.get_project_path(['data', 'layouts'], 'exclude')
                     ],
-                    dest: grunt.paths.static
+                    dest: grunt.get_root_path('static')
                 }
             ]
         },
         templates: {
             expand: true,
-            cwd: grunt.paths.src,
+            cwd: grunt.get_root_path('src'),
             src: [
-                '**/*.jade'
+                grunt.get_project_path('', 'free', '*.jade')
             ],
-            dest: grunt.paths.templates
+            dest: grunt.get_root_path('templates')
         }
     };
 };
