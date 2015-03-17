@@ -6,7 +6,7 @@
   "author": "German Gurov",
   "homepage": "http://3ginger.com",
   "paths":{
-    "root":"www/",
+    "root":"",
     "src":"frontend_src/",
     "static":"static/",
     "templates":"templates/",

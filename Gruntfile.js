@@ -21,7 +21,7 @@ module.exports = function (grunt) {
             key = [key];
         }
         for (var i = 0; i < key.length; i++) {
-            path += grunt.paths[key];
+            path += grunt.paths[key[i]];
         }
         return grunt.paths_patterns[type].replace(grunt.path_key, path) + file_name;
     };
@@ -32,8 +32,10 @@ module.exports = function (grunt) {
             key = [key];
         }
         for (var i = 0; i < key.length; i++) {
-            path += grunt.paths[key];
+            path += grunt.paths[key[i]];
         }
+
+        console.log(path, key);
         return grunt.paths.root + path;
     };
 
