@@ -1,8 +1,18 @@
-button(bc, lightness-factor=60%)
+flex_adjacent_padding(half-pad = 1rem)
+  &:nth-child(2n)
+      padding-left: half-pad
+  &:nth-child(2n+1)
+      padding-right: half-pad
+      
+button(bc, use_factor=fasle, lightness_factor=60%)
   cursor: pointer
   transition background-color .3s ease
   &:hover
-    background-color: lightness(bc, lightness-factor)
+  &.selected
+    if use_factor
+      background-color: bc
+    else
+      background-color: lightness(bc, lightness_factor)
 
 columns(num_cols = 3, gutter = 1, below-size='m')
   width: 100%
@@ -12,6 +22,10 @@ columns(num_cols = 3, gutter = 1, below-size='m')
     margin-bottom: pad
     +below(below-size)
       stack()
+
+set_margine_last_children(num, val=0)
+  &:nth-last-child(-n+{num})
+    margin-bottom: val
 
 content-card(left-side=true, width-static-column=20em, below-size='s')
   display: table
@@ -27,7 +41,7 @@ content-card(left-side=true, width-static-column=20em, below-size='s')
   .left
     if left-side
       width width-static-column
-    padding-right: pad
+    //padding-right: pad
     .picture
       width: 100%
   +below(below-size)
@@ -69,6 +83,12 @@ icon(size_icon = 1.5em)
   &:before
     content '  '
 
+.dec--spaced2x
+  &:before
+    content '  '
+  &:after
+    content '  '
+
 .dec--counted
   &:after
     content ') '
@@ -86,3 +106,7 @@ icon(size_icon = 1.5em)
 .dec--doted
   &:after
     content "..."
+
+.dec--percents
+  &:after
+    content '%'

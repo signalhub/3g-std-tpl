@@ -16,7 +16,7 @@ module.exports = {
     manage_src_dev:[
         'stylus:compile',
         'coffeeify:all',
-        'jade:compile',
+        //'jade:compile',
         'imagemin',
         'svgmin'
     ],

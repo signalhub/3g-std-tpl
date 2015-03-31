@@ -1,0 +1,5 @@
+mixin include_virtual(url, wait=False)
+    if wait
+        <!--# include virtual="{{url}}" wait="yes" -->
+    else
+        <!--# include virtual="{{url}}" -->

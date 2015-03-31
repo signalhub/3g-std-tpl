@@ -1,47 +1,57 @@
-- var site_name = 'www.rambler.ru'
-- var site_developer = 'German Gurov'
-- var debug_mode = true
-- var STATIC_PATH = '/proto-for-finances/static/'
-
-include mixins/general
+- import 'templates/mixins/ssi.jade' as ssi
+- import 'templates/blocks/vars.jade' as vars
+- import 'templates/mixins/head.jade' as head with context
+- import 'templates/mixins/header.jade' as header with context
+- import 'templates/mixins/footer.jade' as footer with context
+- import 'templates/mixins/general.jade' as general with context
+- import 'templates/mixins/widget_line.jade' as widgets_line with context
 
 doctype html
 html(lang="en")
     head
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible' content='IE=edge')
-        title= site_name
-        +header_meta({description:'finances', autor:site_developer, type:'site'})
-        +header_og_meta({title:'finances', description:'finances', url:'', image:''})
+        title
+            block title
+                =vars.site_name
+        +head.head_meta({'description':vars.site_name, 'autor':vars.site_developer, 'type':'site'})
+        +head.head_og_meta({'title':vars.site_name, 'description':vars.site_name, 'url':'', 'image':''}, 'og:')
 
         block head
-            +style('css/app')
-            +script('js/modernizr')
+            +head.style('css/app')
+            +head.script('js/modernizr')
+            +head.script('js/d3')
+            +head.script('js/rem')
+            +head.script('js/main')
+            script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+            //script
+                'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)});
     body
-        //add old browser alert
-        include system/browser_alert
+        include templates/system/browser_alert
 
-        //header section
-        header.root
-            block header
-                include blocks/header
+        .main-wrapper
+            header.root
+                block header
+                    +header.main_header()
+                    +widgets_line.widget_line()
+            main.root
+                block main
+                    section.content
+                        +ssi.include_virtual(url_for("index.menu"))
+                        +general.breadcrumps_line(breadcrumbs)
+                        block content
+                    aside.adsense
+                        block adsense
+                            +ssi.include_virtual('/widgets/currencies/mfd/')
+                            .test-adsense Test
+                            .test-adsense Test
+                            .test-adsense Test
+            footer.root
+                block footer
+                    +footer.about_site_info()
+                    +ssi.include_virtual(url_for('index.footer'))
 
-        //main section
-        main.root
-            block main
 
-        //footer section
-        footer.root
-            block footer
-                include blocks/footer
-
-        //script section
         block scripts
-            if debug_mode
-                include system/debug_panel
-            +script('js/main')
-
-
-
-
-
+            if vars.debug_mode
+                include templates/system/debug_panel

@@ -1,1 +1,41 @@
-h5 All rights reserved 2015
+- import 'templates/mixins/ssi.jade' as ssi
+- import 'templates/mixins/general.jade' as general with context
+
+section.site-map
+    .copyrights.left
+        .wrapper
+            .name
+            .logo.rambler
+                a(href="/")
+                    span.title рамблер.финансы
+                    span.beta бета
+            //- a(href="http://finance.rambler.old.ru", target="_blank") Вернуться к старому дизайну
+            .copyright Рамблер 2015
+
+    nav.footer-menu.right
+        .menu.news-menu
+            .wrapper
+                .name Новости
+                nav.sub-footer-menu
+                    ul
+                        each topic in topics
+                            +general.drop_line(url_for('news.topic_news', topic_code=topic.code), topic)
+        .menu.currencies-menu
+            .wrapper
+                .name Валюты
+                nav.sub-footer-menu
+                    ul
+                        +general.drop_line('/currencies/dynamics/', 'Динамика курсов')
+                        +general.drop_line('link/currency/world/', 'Курсы валют ЦБ РФ')
+                        +general.drop_line('/currencies/consensus/', 'Прогноз стоимости валют')
+                        +general.drop_line('/calculators/currency/', 'Конвертер валют')
+        .menu.services-menu
+            .wrapper
+                .name Сервисы
+                nav.sub-footer-menu
+                    ul
+                        +general.drop_line('/calculators/hypothec/', 'Ипотечный')
+                        +general.drop_line('/calculators/mosrealty/', 'Налог на недвижимость')
+                        +general.drop_line('/currencies/product/', 'Продуктовая корзина')
+
++ssi.include_virtual("/rl0/_blocks/2011/footer/?id=finance&amp;css=1&amp;rv=${rl0_revision}")

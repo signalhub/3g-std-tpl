@@ -34,8 +34,6 @@ module.exports = function (grunt) {
         for (var i = 0; i < key.length; i++) {
             path += grunt.paths[key[i]];
         }
-
-        console.log(path, key);
         return grunt.paths.root + path;
     };
 

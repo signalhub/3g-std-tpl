@@ -1,3 +1,23 @@
+*.pyc
+.idea*
+*.iml
+
+/build
+/node_modules
+/venv
+
+/finance/settings/local.py
+nginx.conf
+npm-debug.log
+
+/finance.egg-info
+/finance/VERSION
+/finance/static/compiled
+/.vagrant
+finance/static
+finance/templates
+
+
 #my work folders
 /tmp/
 /build/

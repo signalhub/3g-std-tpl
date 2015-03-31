@@ -35,14 +35,14 @@ module.exports = function(grunt) {
             ]
         },
 
-        compile_layouts: {
-            files: [
-                grunt.get_root_path('src') + '**/*.jade'
-            ],
-            tasks: [
-                'jade:compile'
-            ]
-        },
+        //compile_layouts: {
+        //    files: [
+        //        grunt.get_root_path('src') + '**/*.jade'
+        //    ],
+        //    tasks: [
+        //        'jade:compile'
+        //    ]
+        //},
 
         img: {
             files: [

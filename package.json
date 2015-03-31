@@ -5,19 +5,19 @@
   "keywords": "grunt, bower, template, 3g, standart, html, jade, stylus, rupture, jeet",
   "author": "German Gurov",
   "homepage": "http://3ginger.com",
-  "paths":{
-    "root":"",
-    "src":"frontend_src/",
-    "static":"static/",
-    "templates":"templates/",
-    "code":"js/",
-    "styles":"css/",
-    "data":"data/",
-    "fonts":"fonts/",
-    "images":"img/",
-    "temp":"tmp/",
-    "build":"build/",
-    "layouts":"layouts/"
+  "paths": {
+    "root": "",
+    "src": "frontend_src/",
+    "static": "static/",
+    "templates": "templates/",
+    "code": "js/",
+    "styles": "css/",
+    "data": "data/",
+    "fonts": "fonts/",
+    "images": "img/",
+    "temp": "tmp/",
+    "build": "build/",
+    "layouts": "layouts/"
   },
   "devDependencies": {
     "canvas": "^1.2.1",
@@ -40,6 +40,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-newer": "^0.7.0",
     "grunt-svgmin": "^2.0.1",
+    "grunt-uncss": "^0.4.1",
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.16.0"
   },
@@ -52,7 +53,8 @@
     "markdown": "^0.5.0",
     "nib": "^1.1.0",
     "time-grunt": "^1.1.0",
-    "underscore": "^1.8.2"
+    "underscore": "^1.8.2",
+    "moment": "^2.9.0"
   },
   "license": "MIT"
 }

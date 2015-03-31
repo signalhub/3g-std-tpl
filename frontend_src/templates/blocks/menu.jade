@@ -1,0 +1,36 @@
+- import 'templates/mixins/general.jade' as general with context
+
+section.page-menu
+    .logo.rambler.left
+        a(href="/")
+            span.title рамблер.финансы
+            span.beta бета
+
+    nav.main-menu.right
+        .menu
+            .wrapper
+                .name Валюты
+                nav.sub-main-menu
+                    ul
+                        +general.drop_line('/currencies/dynamics/', 'Динамика курсов')
+                        +general.drop_line('link/currency/world/', 'Курсы валют ЦБ РФ')
+                        +general.drop_line('/currencies/consensus/', 'Прогноз стоимости валют')
+                        +general.drop_line('/calculators/currency/', 'Конвертер валют')
+        .menu
+            .wrapper
+                .name Новости
+                nav.sub-main-menu
+                    ul
+                        each topic in topics
+                            +general.drop_line(url_for('news.topic_news', topic_code=topic.code), topic)
+        .menu
+            .wrapper
+                a.name(href=url_for('news.topic_news', topic_code='analytics')) Аналитика
+        .menu
+            .wrapper
+                .name Калькуляторы
+                nav.sub-main-menu
+                    ul
+                        +general.drop_line('/calculators/hypothec/', 'Ипотечный')
+                        +general.drop_line('/calculators/mosrealty/', 'Налог на недвижимость')
+                        +general.drop_line('/currencies/product/', 'Продуктовая корзина')

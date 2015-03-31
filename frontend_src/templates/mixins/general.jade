@@ -1,25 +1,151 @@
-mixin style(relative_path, branch_path)
-    - branch_path = branch_path || ''
-    link(rel='stylesheet' href=STATIC_PATH + branch_path + relative_path + (debug_mode ? '.css':'.min.css'))
+﻿mixin drop_line(url, title)
+  li.drop-line
+    a(href=url)= title
 
-mixin script(relative_path, branch_path)
-    - branch_path = branch_path || ''
-    script(src=STATIC_PATH + branch_path + relative_path + (debug_mode ? '.js' : '.min.js'))
+mixin support_info(news, spaced = true, all=true)
+    .support-info
+        if all
+            span.source= news.resource
+        span.time(class = ('dec--spaced' if spaced else 'dec--equal'))= helpers_timesince(news.pubdate)
 
-mixin smart_import(path, level)
-    level = level || 0
-    - var full_path = path
-    - var i = 0
-    while i < level
-        - full_path = '../' + full_path
-    +script(full_path)
+mixin main_news(news, min = false)
+    article.news
+        .preview(style="background-image:url({{news.image.to_first_news()}})")
+            .fader
+            h2.title
+                a(href=url_for('.single_news', news_id=news.id))= news.custom_title
+        if min
+            +support_info(news, false)
 
-mixin header_meta(headers)
-    if headers
-        each content, key in headers
-            meta(name='#{key}', content='#{content}')
+mixin main_news_roll(news, min = false, kwargs)
+    section.main-news-roll(class=kwargs.class, id=kwargs.id)
+        each news_element in news
+            +main_news(news_element, min)
 
-mixin header_og_meta(headers)
-    if headers
-        each content, key in headers
-            meta(property='og:#{key}', content='#{content}')
+mixin main_news_mini_roll(news, min = false)
+    each news_element in news
+        +main_news(news_element, min)
+
+mixin slider(news, min=false, kwargs)
+    section.slider(class=kwargs.class, id=kwargs.id)
+        +main_news_roll(news, min)
+        .pager
+            each news_element in news
+                .page-point
+
+mixin news_roll(news, topic_code, kwargs)
+    section.news-roll
+        each news_element in news
+            article.news
+                h5.title
+                    a(href=url_for('.single_news', news_id=news_element.id, topic_code=topic_code))= news_element.title
+                +support_info(news_element)
+
+mixin topics_roll(topics, kwargs)
+    section.topics-roll
+        each topic in topics
+            section.topic
+                h5.title
+                    a(href=url_for('.topic_news', topic_code=topic.topic.code))= topic.topic
+                +news_roll(topic.news_list, topic.topic.code)
+
+mixin popular_news_roll(news, kwargs)
+    section.popular_news_roll
+        each news_element in news
+            article.news
+                .preview
+                    img(src=news_element.image.to_image_in_page())
+                    .fader
+                    h6.title
+                        a(href=url_for('.single_news', news_id=news_element.id))= news_element.custom_title
+                p.annotation= news_element.annotation
+
+
+mixin standalone_news(news)
+    section.standalone-news
+        h2.title= news.title
+        section.main
+            .preview.left(style="background-image:url({{news.image.to_single_news_page()}})")
+            .share.right
+                h6.support-info-wrapper
+                    span.resource-lable Источник
+                    span.resource= news.resource
+                    +support_info(news, all=false)
+                h6.sharing-label Поделиться новость:
+                section.sharing-buttons
+                    .fb.sharing-button 13
+                    .vk.sharing-button 18
+                    .tw.sharing-button 0
+                    .go.sharing-button 143
+                    .ok.sharing-button 8
+                    .lj.sharing-button 8
+                section.other-sharing-buttons
+                    .email.sharing-button Отправить на&nbsp;email
+                    .print.sharing-button Версия для&nbsp;печати
+        .photograph-wrapper
+            | Фото
+            span.dec--property.photograph= news.image.resource_title
+        .text= news.annotation|safe
+
+//- запросить дату
+mixin today_news(news, kwargs)
+    section.today-news
+        h5.title
+            | Сегодня
+            span.dec--secondary.date 23 февраля
+        section.news-roll
+            each news_element in news
+                article.news
+                    .preview.left
+                        img(src=news_element.image.to_first_news())
+                    .main-info.right
+                        h4.title
+                            a(href=url_for('.single_news', news_id=news_element.id))= news_element.custom_title
+                        p.annotation= news_element.annotation
+                        +support_info(news_element)
+
+//- запросить дату
+mixin past_news(news, limit = 2, kwargs)
+    if news
+        section.past-news
+            h5.title
+                | Вчера
+                span.dec--secondary.date 22 февраля
+            section.news-roll
+                each news_element in news
+                    article.news
+                        h2.title
+                            a(href=url_for('.single_news', news_id=news_element.id))= news_element.custom_title
+                        +support_info(news_element)
+        .more-button Больше новостей о финансах
+
+mixin relative_news(news)
+    section.relative-news
+        h1.title Материалы по теме
+        .news-roll
+            each news_element in news
+                .news
+                    h3.title
+                        a(href=url_for('.single_news', news_id=news_element.id))= news_element.custom_title
+                        img(src=news_element.image.to_first_news())
+                        +support_info(news_element)
+
+
+mixin breadcrumps_line(breadcrumbs)
+    if breadcrumbs
+        .breadcrumps-line
+            each text, link in breadcrumbs
+                if loop.last
+                    span= text
+                else 
+                    a(href=link)= text
+                    span.dec--equal
+
+
+
+//- mixin article_emphasis_block(block)
+//- mixin article_quoted_block(block)
+//- mixin visual_content()
+//- mixin relative_tags(tags)
+//- mixin relative_words(words)
+

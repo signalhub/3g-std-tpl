@@ -1,0 +1,9 @@
+- import 'templates/mixins/adsense.jade' as adsense with context
+- import 'templates/mixins/ssi.jade' as ssi
+
+mixin main_header()
+    +adsense.billboard_adsense()
+    .topline
+        +ssi.include_virtual("/rl0/init.html", wait=True)
+        +ssi.include_virtual("/rl0/ifserver/", wait=True)
+        +ssi.include_virtual("/rl0/_blocks/2.0/topline/?id=finance&amp;css=1&amp;centered=1&amp;ifserver_external=1&amp;rv=${rl0_revision}&amp;at_yes=1", wait=True)

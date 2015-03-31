@@ -1,0 +1,10 @@
+- import 'templates/mixins/ssi.jade' as ssi
+
+mixin widget_line()
+    .widget-line
+        +ssi.include_virtual('/widgets/currencies/primary/')
+        +ssi.include_virtual('/widgets/forecasts/average/')
+        +ssi.include_virtual('/widgets/currencies/dynamics/')
+        +ssi.include_virtual('/widgets/currencies/calc/')
+        include widgets/best_exchange_rates.jade
+

@@ -2,7 +2,7 @@
 @require 'nib'
 @require '../../bower/normalize.css/normalize.css'
 @require '../../bower/jeet/stylus/jeet/index'
-@require '../../bower/typographic/typographic/index'
+@require '../../bower/typographic/typographic'
 @require '../../bower/rupture-by-jenius/rupture/index'
 
 @require 'vars'
@@ -11,5 +11,487 @@
 @require 'debug'
 @require 'global'
 
-h1
-  color: red
+xlarge-main-width = 1280
+xlarge-content-width = 944
+xlarge-adsense-width = xlarge-main-width - xlarge-content-width
+xlarge-main-news-width = 528
+xlarge-sub-news-width = xlarge-content-width - xlarge-main-news-width
+xlarge-main-tv-width = 623
+xlarge-sub-tv-width = xlarge-content-width - xlarge-main-tv-width
+
+
+
+large-main-width = 976
+large-content-width = 672
+large-adsense-width = large-main-width - large-content-width
+large-main-news-width = 416
+large-sub-news-width = large-content-width - large-main-news-width
+
+ul
+    padding 0
+    list-style-type none
+a
+    text-decoration none
+    &:hover
+        text-decoration underline
+
+
+.support-info
+    color fade-col
+
+.breadcrumps-line
+    margin-bottom: (pad*3)
+    padding 0 pad
+    a
+    span
+        color breadcrumps-col
+    a
+        text-decoration underline
+
+.preview
+    background low-col center center no-repeat
+    background-size cover
+    img
+        width 100%
+        display block
+        opacity: .8
+    .fader
+        size 100% 50%
+        absolute left bottom
+        background: linear-gradient(top, rgba(high-col, 0), rgba(low-col, .5))
+    .title
+        padding: 0 pad
+        absolute bottom pad left
+        a
+            color high-col
+
+.logo.rambler
+    a
+        text-decoration none
+        color low-col
+        display inline-block
+    .title
+        top small-pad
+        font-size 1.75rem
+        font-weight: bold
+    .beta
+        font-size 0.625rem
+        background-color beta-col
+        color beta-text-col
+        absolute left (small-pad/2) top
+        text-transform uppercase
+        padding: 0 small-pad
+
+.more-button
+    width 100%
+    text-align: center
+    text-transform uppercase
+    background-color more-btn-col
+    line-height 1.5
+
+
+
+section.standalone-news
+    sharing-size = pad*2.5
+    .title
+        margin-bottom: large-pad
+    .text
+        font-size 0.9375rem
+    .photograph-wrapper
+        font-size 0.75rem
+        color gray
+        margin-bottom: large-pad
+    section.main
+        content-card()
+        margin-bottom: pad
+        .preview
+            width unit((xlarge-main-tv-width/xlarge-content-width*100), '%')
+            height 25rem
+        .share
+            padding: 0 large-pad 0 (pad*3)
+            .sharing-label
+            .support-info-wrapper
+                margin-bottom: pad
+            section.other-sharing-buttons
+                border-radius 2px
+                border 1px solid breadcrumps-col
+                padding middle-pad pad
+                font-size 0
+                absolute bottom
+                left (pad*3)
+                right large-pad
+                .sharing-button
+                    display inline-block
+                    vertical-align top
+                    width: 50%
+                    &:first-child
+                        border-right 1px solid breadcrumps-col
+                    &:last-child
+                        padding-left: pad
+                        border-left 1px solid breadcrumps-col
+                        margin-left: -1px;
+            section.sharing-buttons
+                font-size 0
+                width: (sharing-size*3)
+                .sharing-button
+                    text-align: center
+                    font-size 0.75rem
+                    padding-top: 4.625rem
+                    display inline-block
+                    vertical-align top
+                    width: sharing-size
+                    border 1px solid breadcrumps-col
+                    background center middle-pad no-repeat
+                    background-image: url(http://www.aucpress.com/images/sm/facebook.png)
+                    margin-left: -1px
+                    margin-bottom: pad
+    +below(xlarge-size)
+        section.main
+            .share
+                padding: 0 0 0 large-pad
+                section.sharing-buttons
+                    .sharing-button
+                        &.go
+                        &.ok
+                        &.lj
+                            display none
+                section.other-sharing-buttons
+                    border none
+                    left large-pad
+                    right pad
+                    padding 0
+                    .sharing-button
+                        display block
+                        width (sharing-size*3)
+                        border none
+                        border-radius 2px
+                        border 1px solid breadcrumps-col
+                        padding small-pad pad
+                        &:first-child
+                            margin-bottom: pad
+section.main-news-roll
+    .news
+        .preview
+            height 20rem
+            .title
+                bottom large-pad
+        .support-info
+            absolute bottom left
+            padding: 0 xlarge-pad 0 pad
+            line-height: 3
+
+//ovveride .main-news-roll
+section.slider
+    overflow hidden
+    section.main-news-roll
+        font-size 0
+        width 300%
+        .news
+            display inline-block
+            vertical-align top
+            width (100%/3)
+    .pager
+        point-size = (middle-pad)
+        absolute right bottom pad
+        padding-right: pad
+        height point-size
+        .page-point
+            display inline-block
+            border-radius 50%
+            size point-size
+            background-color: point-col
+            button(high-col)
+
+
+section.main-news-tvs
+    content-card()
+    margin-bottom: large-pad
+    .left
+        width unit((xlarge-main-tv-width/xlarge-content-width*100), '%')
+        .news
+            .preview
+                height 25rem
+                .title
+                    pad-size = large-pad
+                    padding 0 pad-size
+                    bottom pad-size
+    .right
+        .news
+            left: (pad*3);
+            right: large-pad;
+            &:first-child
+                absolute top
+            &:last-child
+                absolute bottom
+            .preview
+                height 10rem
+                margin-bottom: small-pad
+                .title
+                    font-size: 0.8125rem;
+    +below(xlarge-size)
+        .left
+            .news
+                .preview
+                    height 20rem
+        .right
+            .news
+                left large-pad
+                right 0
+                .preview
+                    height 7rem
+
+
+
+section.past-news
+    border-bottom 1px dotted low-col
+    margin-bottom: (pad*3)
+    padding-bottom: large-pad
+    border-bottom 1px dotted low-col
+    >.title
+        text-transform uppercase
+        margin-bottom: large-pad
+    section.news-roll
+        center()
+        .news
+            num_cols = 2
+            col(1/num_cols, gattor:0, cycle:num_cols)
+            margin-bottom: pad
+            padding-right: large-pad
+            set_margine_last_children(num_cols)
+            .title
+                font-weight bold
+                font-size 1rem
+                a
+                    color low-col
+    +below(xlarge-size)
+        section.news-roll
+            .news
+                set_margine_last_children(2, pad)
+                &:last-child
+                    margin-bottom 0
+                stack()
+
+section.today-news
+    margin-bottom: (pad*3)
+    padding-bottom: large-pad
+    border-bottom 1px dotted low-col
+    >.title
+        text-transform uppercase
+        margin-bottom: large-pad
+    section.news-roll
+        content-card()
+        .news
+            margin-bottom: large-pad
+            .preview
+                background-color: initial
+                width 10rem
+            .main-info
+                padding-left: large-pad
+                .title
+                    font-weight bold
+                    font-size 1rem
+                    margin-bottom: pad
+                    a
+                        color low-col
+                .support-info
+                    position: absolute;
+                    bottom: 0;
+                .annotation
+                    height 1.15rem
+                    overflow hidden
+            &:last-child
+                margin-bottom 0
+
+section.popular_news_roll
+    center()
+    .news
+        col(1/2, gutter:0, cycle:2)
+        flex_adjacent_padding(middle-pad)
+        margin-bottom: large-pad
+        .preview
+            margin-bottom: pad
+            .title
+                bottom pad
+    +below(xlarge-size)
+        .news
+            stack()
+
+section.topics-roll
+    .topic
+        a
+            color low-col
+        >.title
+            text-transform uppercase
+            margin-bottom: pad
+        section.news-roll
+            .news
+                margin-bottom: pad
+                .title
+                    font-weight normal
+
+
+
+
+.main-wrapper
+    center(xlarge-size)
+    footer.root
+        .name
+            font-weight bold
+            padding-bottom: pad
+            color low-col
+            border-bottom 1px solid beta-text-col
+            margin-bottom: pad
+        .r__footer
+            background-color: rambler-footer-col
+            padding: 0 large-pad
+            .r__footer__firstline
+            .r__footer__secondline
+                display inline-block
+                span
+                a
+                    font-size 0.75rem
+                    color white
+        section.about-site-info
+            center()
+            padding: 0 large-pad
+            color beta-text-col
+            p
+                col(1/2, gutter:0, cycle:2)
+                flex_adjacent_padding(middle-pad)
+                margin-bottom: pad
+        section.site-map
+            content-card()
+            padding: large-pad
+            background-color: other-content-col
+            color beta-text-col
+            a
+                color beta-text-col
+            .copyrights.left
+                .wrapper
+                    absolute bottom left
+                    .logo.rambler
+                        margin-bottom: pad
+            nav.footer-menu.right
+                .news-menu
+                    col(2/4, gutter:0)
+                    .wrapper
+                        min-width 15rem
+                    ul
+                        center()
+                    li
+                        col(1/2, gutter:0, cycle:2)
+                        white-space nowrap
+                .currencies-menu
+                .services-menu
+                    col(1/4, gutter:0)
+                .wrapper
+                    float right
+    main.root
+        center()
+        section.content
+            column(xlarge-content-width/xlarge-main-width, gutter:0)
+            padding: large-pad large-pad xlarge-pad large-pad
+            section.page-menu
+                content-card()
+                font-size 0
+                margin-bottom: (pad*3)
+                padding-left: pad
+                nav.main-menu
+                    >*
+                        display inline-block
+                        vertical-align top
+                        width 25%
+                        text-align center
+                        .wrapper
+                            margin: 0 auto
+                            display inline-block
+                            &:hover
+                                .name
+                                    z-index 3
+                                    text-decoration underline
+                                nav.sub-main-menu
+                                    border 1px solid low-col
+                                    padding: (pad*3) pad pad pad
+                                    margin-left: -(pad)
+                                    margin-top: -(pad*2)
+                                    display block
+                        a.name
+                            display block
+                        .name
+                            font-weight bold
+                            padding-top: pad
+                            color low-col
+                            &:hover
+                                text-decoration underline
+                        nav.sub-main-menu
+                            display: none;
+                            position: absolute;
+                            z-index: 2;
+                            background-color: high-col;
+                            text-align left
+                            white-space nowrap
+                            .drop-line
+                                a
+                                    color low-col
+
+            section.main-news
+                column(xlarge-main-news-width/xlarge-content-width, gutter:0)
+            aside.sub-news
+                column(xlarge-sub-news-width/xlarge-content-width, gutter:0)
+                padding: 0 pad 0 large-pad
+
+
+            section.front-content
+                padding: 0 pad
+                margin-bottom: large-pad
+                .topic-title
+                    margin-bottom: large-pad
+            section.other-content
+                padding: pad
+                background-color: other-content-col
+
+        aside.adsense
+            padding-top: (pad*3)
+            padding-right: large-pad
+            column(xlarge-adsense-width/xlarge-main-width, gutter:0)
+            .test-adsense
+                width 100%
+                height 20rem
+                background-color gray
+                margin-bottom: pad
+
+    +below(xlarge-size)
+        center(large-size)
+        .breadcrumps-line
+            padding-left 0
+        footer.root
+            section.about-site-info
+                padding: 0 pad
+        main.root
+            section.content
+                column(large-content-width/large-main-width, gutter:0)
+                padding: large-pad pad xlarge-pad pad
+                section.page-menu
+                    margin-bottom: large-pad
+                    padding-left: 0
+                section.main-news
+                    column(large-main-news-width/large-content-width, gutter:0)
+                aside.sub-news
+                    column(large-sub-news-width/large-content-width, gutter:0)
+                    padding-right: 0
+                section.front-content
+                    padding: 0
+            aside.adsense
+                column(large-adsense-width/large-main-width, gutter:0)
+                padding-right: pad
+    +below(large-size - 10px)
+        main.root
+            section.content
+            aside.adsense
+                stack()
+    +below('m')
+        main.root
+            section.content
+                section.main-news
+                aside.sub-news
+                    stack()

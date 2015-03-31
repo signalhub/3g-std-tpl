@@ -1,36 +1,5 @@
 var _ = require('underscore');
 
-//add debug panel
-(function(){
-    var dp = document.getElementById('debug-panel');
-    function toggleDebugPanel() {
-        if(dp.classList.contains('active')) {
-            dp.classList.remove('active');
-        } else {
-            dp.classList.add('active');
-        }
-    }
-
-    window.onkeyup = function(e) {
-        if (e.keyCode == 73 && e.ctrlKey && !e.shiftKey) {
-            toggleDebugPanel();
-        }
-    };
-
-    function _addMessage(message) {
-        if(dp) {
-            var e = document.createElement('pre');
-            e.innerHTML = message;
-            dp.appendChild(e);
-        }
-    }
-
-    window.debug = {
-        addMessage:_addMessage
-    };
-})();
-debug.addMessage('Hello debug');
-
 // Avoid console errors in browsers that lack a console.
 (function() {
     var method;
@@ -51,7 +20,7 @@ debug.addMessage('Hello debug');
         if (!console[method]) {
             console[method] = noop;
         }
-    }
+    } 
 }());
 
 //RAF
@@ -81,3 +50,9 @@ debug.addMessage('Hello debug');
         };
 }());
 
+
+var index = require('./index.js');
+var d3localLib = require('./d3local.js');
+d3localLib();
+var g3Lib = require('./g3.js');
+g3Lib();

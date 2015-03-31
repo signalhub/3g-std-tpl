@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    console.log(grunt.get_project_path('styles', 'any', '*.css'));
     return {
         all:{
             expand: true,

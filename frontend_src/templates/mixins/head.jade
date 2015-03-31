@@ -1,0 +1,17 @@
+- import 'templates/blocks/vars.jade' as vars
+
+mixin head_meta(headers)
+    if headers
+        each key, val in headers.iteritems()
+            meta(name=key, content=val)
+
+mixin head_og_meta(headers, namespace = '')
+    if headers 
+        each key, val in headers.iteritems()
+            meta(property=namespace+key, content=val)
+
+mixin style(relative_path, branch_path='')
+    link(rel='stylesheet' href=(vars.STATIC_PATH + branch_path + relative_path + ('.css' if vars.debug_mode else '.min.css'))))
+
+mixin script(relative_path, branch_path='')
+    script(src=(vars.STATIC_PATH + branch_path + relative_path + ('.js' if vars.debug_mode else '.min.js')))

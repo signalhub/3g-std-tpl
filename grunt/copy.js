@@ -8,7 +8,8 @@ module.exports = function(grunt) {
                     src: [
                         'bower/modernizr/modernizr.js',
                         'bower/jquery/dist/jquery.js',
-                        'bower/d3/d3.js'
+                        'bower/d3/d3.js',
+                        'bower/REM-unit-polyfill/js/rem.js'
                     ],
                     dest: grunt.get_root_path(['static', 'code']),
                     filter: 'isFile'
